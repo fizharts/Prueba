@@ -1,0 +1,29 @@
+
+
+
+.thead-green {
+    background-color: $verdeMedio;
+    color: #fff;
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+
+.btn-editar {
+    background-color: $success!important;
+    color: #fff;
+    &:hover{
+        background-color:darken($success, 10%)!important;
+        color: #fff!important;
+    }
+}
+
+
+.btn-borrar {
+    background-color: $danger!important;
+    color: #fff;
+    &:hover{
+        background-color:darken($danger, 10%)!important;
+        color: #fff!important;
+    }
+}
