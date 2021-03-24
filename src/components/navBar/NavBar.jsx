@@ -1,6 +1,21 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { changeLocal } from '../../redux/usuariosDuck';
+
 
 export const NavBar = () => {
+    const {local} = useSelector(state => state.usuarios)
+    const dispatch = useDispatch();
+
+    const handleChange = ( { target:{value} } )=> {
+        console.log(value)
+    }
+
+    const handleClick = ()=> {
+        dispatch(
+            changeLocal(!local)
+        )
+    }
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-green">
             <a className="navbar-brand" href="#">Navbar</a>
@@ -12,14 +27,23 @@ export const NavBar = () => {
                     
                 </ul>
                 <form className="form-inline my-2 my-lg-0">
-                    <input className="form-control mr-sm-2" type="text" placeholder="Search" />
-                    <button className="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                    <input 
+                        className="form-control mr-sm-2" 
+                        type="text"
+                        onChange={(e)=>handleChange(e)} 
+                        placeholder="Buscar" />
+                    <button className="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
                 <ul className="navbar-nav">
                 <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <a className="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cambio</a>
                 <div className="dropdown-menu" aria-labelledby="dropdownId">
-                    <a className="dropdown-item" href="#">Action 1</a>
+                    <button className="dropdown-item cambioMoneda" 
+                            onClick={handleClick} 
+                    >{
+                        local ? (`Pesos `):(`Dolares`)
+                    }
+                    </button>
                     <a className="dropdown-item" href="#">Action 2</a>
                 </div>
             </li>

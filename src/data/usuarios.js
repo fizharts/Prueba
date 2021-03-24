@@ -4,7 +4,7 @@ export const usuariosJson = [
         nombre:"Julio",
         apellidoPaterno:"Picazo",
         apellidoMaterno:"Rodriguez",
-        salario: 5000,
+        salario: 15000.12305,
         empresa: 'telcel',
         imagen : 'img'
         
@@ -14,7 +14,7 @@ export const usuariosJson = [
         nombre:"juan",
         apellidoPaterno:"Ramirez",
         apellidoMaterno:"Ledesma",
-        salario: 9000,
+        salario: 19000.00,
         empresa: 'Movistar',
         imagen : 'img'
         
@@ -25,7 +25,7 @@ export const usuariosJson = [
         apellidoPaterno:"Peréz",
         apellidoMaterno:"Rodriguez",
         empresa: 'telcel',
-        salario: 12000,
+        salario: 12000.00,
         imagen : 'img'
         
     }  , 
@@ -35,7 +35,17 @@ export const usuariosJson = [
         apellidoPaterno:"Lopéz",
         apellidoMaterno:"Guitierréz",
         empresa: 'telcel',
-        salario: 19000,
+        salario: 19000.00,
+        imagen : 'img'
+        
+    } ,
+    {
+        id : 5,
+        nombre:"Leonardo",
+        apellidoPaterno:"Lopéz",
+        apellidoMaterno:"Guitierréz",
+        empresa: 'telcel',
+        salario: 9000.00,
         imagen : 'img'
         
     }

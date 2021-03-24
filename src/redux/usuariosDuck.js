@@ -1,7 +1,8 @@
 import { types } from "./types"
 import {usuariosJson} from"../data/usuarios"
 const initialState = {
-    usuarios : []
+    usuarios : [],
+    local : false
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -10,7 +11,13 @@ export default (state = initialState, { type, payload }) => {
     case types.usuarios:
         return { 
             ...state, 
-            usuarios : payload.usuarios }
+            usuarios : payload.usuarios 
+        }
+    case types.local :
+        return {
+            ...state ,
+            local : payload.local
+        }
 
     default:
         return state
@@ -34,3 +41,10 @@ export const getUsuarios = () => {
         }
     };
 };
+
+export const changeLocal = (local) => ({
+    type: types.local ,
+    payload : {
+        local
+    }
+});

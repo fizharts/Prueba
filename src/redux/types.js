@@ -1,3 +1,4 @@
 export const types = {
-    'usuarios' : '[ users ] todos'
+    'usuarios' : '[ users ] todos',
+    'local' : '[ moneda ] cambiar  moneda'
 }
