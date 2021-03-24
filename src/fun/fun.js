@@ -1,12 +1,23 @@
 
+export const formatoNumero = ( numero ) => {
 
-export const setLocalStorage = ( item ) => {
+    if(typeof numero !== 'number'){
+       numero = parseInt( numero)
+    }
 
-    console.log(item)
+    return `$ ${numero.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits: 2})}`
 }
 
-export const formatoNumero = ( numero, l ) => {
 
-    return `$${numero.toLocaleString(l,{minimumFractionDigits:2,maximumFractionDigits: 2 ,minimumGroupingDigits:3})}`
+export  const buscador = (arreglo , parametro)=> {
+
+    // convertimos todo a minusculas y filtramos por parametro obtenido del input
+    return arreglo.filter( a => 
+        (a.nombre.toLowerCase()).includes(parametro.toLowerCase()) || 
+        (a.apellidoPaterno.toLowerCase()).includes(parametro.toLowerCase()) ||
+        (a.apellidoMaterno.toLowerCase()).includes(parametro.toLowerCase()) ||
+        (a.empresa.toLowerCase()).includes(parametro.toLowerCase()))
+    
+
 }
 

@@ -1,0 +1,28 @@
+.btn-editar {
+    color: $success!important;
+    border: 1px $success solid;
+    border-radius: 3px;
+    color: #fff;
+    &:hover{
+        background-color:darken($success, 10%)!important;
+        color: #fff!important;
+        border: 1px darken($success, 10%) solid;
+    }
+}
+
+
+.btn-borrar {
+    color: $danger!important;
+    border: 1px $danger solid;
+    border-radius: 3px;
+    &:hover{
+        background-color:$danger;
+        color: #fff!important;
+    }
+}
+
+
+.btn-outline-editar{
+    border: 1px red solid!important;
+    border-radius: 4px;
+}

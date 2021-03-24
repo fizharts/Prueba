@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { changeLocal } from '../../redux/usuariosDuck';
+import { buscador } from '../../fun/fun';
+import { changeLocal , setUsuarios } from '../../redux/usuariosDuck';
 
 
 export const NavBar = () => {
-    const {local} = useSelector(state => state.usuarios)
+    const {local , usuarios , usuariosConst} = useSelector(state => state.usuarios)
     const dispatch = useDispatch();
 
+    // obtenemos los datos del input y cambiamos el reducer general y mantenemos el constante 
     const handleChange = ( { target:{value} } )=> {
         console.log(value)
+        dispatch(
+            setUsuarios( 
+                buscador(usuariosConst , value) 
+            )
+        )
+        console.log( buscador(usuarios , value) )
     }
 
     const handleClick = ()=> {
@@ -16,6 +24,10 @@ export const NavBar = () => {
             changeLocal(!local)
         )
     }
+
+    useEffect(() => {
+        buscador(usuarios , 'tel')
+    }, [])
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-green">
             <a className="navbar-brand" href="#">Navbar</a>
@@ -26,15 +38,12 @@ export const NavBar = () => {
                 <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                     
                 </ul>
-                <form className="form-inline my-2 my-lg-0">
-                    <input 
-                        className="form-control mr-sm-2" 
-                        type="text"
-                        onChange={(e)=>handleChange(e)} 
-                        placeholder="Buscar" />
-                    <button className="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
-                </form>
+                
                 <ul className="navbar-nav">
+                <li className="nav-link">Numero de empleados : {usuarios.length}</li>
+                <li className="nav-link">Moneda : {
+                    local ? 'USD' : 'MXN'
+                }</li>
                 <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cambio</a>
                 <div className="dropdown-menu" aria-labelledby="dropdownId">
@@ -44,10 +53,17 @@ export const NavBar = () => {
                         local ? (`Pesos `):(`Dolares`)
                     }
                     </button>
-                    <a className="dropdown-item" href="#">Action 2</a>
                 </div>
             </li>
                 </ul>
+                <form className="form-inline my-2 my-lg-0">
+                    <input 
+                        className="form-control mr-sm-2" 
+                        type="text"
+                        onChange={(e)=>handleChange(e)} 
+                        placeholder="Buscar" />
+                    <button className="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
             </div>
         </nav>
 
