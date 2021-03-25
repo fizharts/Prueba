@@ -44,25 +44,21 @@ export const NavBar = () => {
                 <li className="nav-link">Moneda : {
                     local ? 'USD' : 'MXN'
                 }</li>
-                <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cambio</a>
-                <div className="dropdown-menu" aria-labelledby="dropdownId">
-                    <button className="dropdown-item cambioMoneda" 
+
+                </ul>
+                <button className="btn btn-outline-light my-2 mr-3 my-sm-0" 
                             onClick={handleClick} 
                     >{
                         local ? (`Pesos `):(`Dolares`)
                     }
                     </button>
-                </div>
-            </li>
-                </ul>
                 <form className="form-inline my-2 my-lg-0">
+                
                     <input 
                         className="form-control mr-sm-2" 
                         type="text"
                         onChange={(e)=>handleChange(e)} 
                         placeholder="Buscar" />
-                    <button className="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
             </div>
         </nav>

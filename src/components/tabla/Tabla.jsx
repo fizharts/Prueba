@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
+
 import { formatoNumero } from '../../fun/fun'
-import { setUsuarios , setUsuariosConst } from '../../redux/usuariosDuck'
+import { setId, setUsuarios , setUsuariosConst } from '../../redux/usuariosDuck'
+import { Foto } from '../Foto/Foto'
+import { Modals } from '../modals/Modals';
 
 const Tabla = () => {
-    const { usuarios , local } = useSelector(state => state.usuarios)
+    const { usuarios , local ,ultimoId } = useSelector(state => state.usuarios)
     const dispatch = useDispatch()
-    
     const [agregarUsuario, setAgregarUsuario] = useState({
 
-            id : usuarios.length,	
+            id : ultimoId	,
             nombre : '',
             apellidoPaterno : '',
             apellidoMaterno : '',
@@ -31,11 +33,6 @@ const Tabla = () => {
             imagen : ''
     })
 
-
-
-    useEffect(() => {
-
-    },[])
 
     const editar = ( {target:{dataset:{id}}} )=> {
         let filtrado = usuarios.filter(u => u.id === parseInt(id))  
@@ -63,6 +60,11 @@ const Tabla = () => {
                             filtrado
                         )
                     )
+                    dispatch(
+                        setUsuariosConst(
+                            filtrado
+                        )
+                    )
                   Swal.fire(
                     'Borrado!',
                     'Este usuario fue eliminado',
@@ -75,17 +77,15 @@ const Tabla = () => {
     }
 
     const handleChange = ({target:{name , value}})=> {
-        
         setAgregarUsuario({
             ...agregarUsuario,
             [name] : value,
-            id: (usuarios.length+1)
+            id: ultimoId
         })
 
     }   
     
     const handleChangeEditar = ({target:{name , value}})=> {
-        
         setEditarUsuario({
             ...editarUsuario,
             [name] : value,
@@ -98,6 +98,7 @@ const Tabla = () => {
     const handleSubmit = ( e )=> {
         e.preventDefault()
         
+
         dispatch(
             setUsuarios([
                 ...usuarios ,
@@ -111,8 +112,23 @@ const Tabla = () => {
                 agregarUsuario
             ])
         )
-        
 
+            setAgregarUsuario({
+                id : 0	,
+                nombre : '',
+                apellidoPaterno : '',
+                apellidoMaterno : '',
+                salario : 0,
+                empresa : '',
+                imagen : ''
+            })
+            
+            dispatch(
+                setId(
+                    ultimoId+1
+                )
+            )
+            
     }
 
     const handleSubmitEdit = ( e )=> {
@@ -124,7 +140,7 @@ const Tabla = () => {
         ] 
         nuevo.sort((a,b)=> a.id -b.id)
         
-            console.log(nuevo)
+     
 
             dispatch(
                 setUsuarios([
@@ -138,15 +154,13 @@ const Tabla = () => {
                     ...nuevo
                 ])
             )
-        
-      
-        
     }
 
     const agregar = ()=> {
+     
         setAgregarUsuario({
 
-            id : usuarios.length,	
+            id : ultimoId ,	
             nombre : '',
             apellidoPaterno : '',
             apellidoMaterno : '',
@@ -155,10 +169,15 @@ const Tabla = () => {
             imagen : ''
 
     })
+   
+
+        
     }
 
     return (
-        <fragment classname="justify-content-center">
+        <Fragment>
+
+    
             <h2 className="mt-5">Control de usuarios</h2>
             <table className="table  mt-5  ">
                 <thead className=" thead-green ">
@@ -204,14 +223,16 @@ const Tabla = () => {
                                             :(formatoNumero(salario ))
                                 }
                                 </td>
-                                <td className="text-right">{imagen}</td>
+                                <td className="text-right">
+                                    <Foto/>
+                                </td>
                                 <td className="text-right">
                                     <button className="btn btn-sm btn-editar mr-2" 
                                             data-id={id} 
                                             onClick={(e)=>editar(e)}
                                             data-toggle="modal" 
                                             data-target="#modelEditar"
-                                            modelEditar
+                                            
                                             >Editar
                                     </button>
                                     <button className="btn btn-sm btn-borrar"
@@ -229,174 +250,19 @@ const Tabla = () => {
 
             <div>
 
-        <div className="modal fade" id="modelId" 
-            tabIndex={-1} role="dialog" 
-            aria-labelledby="modelTitleId" 
-            aria-hidden="true">
-            <div className="modal-dialog" role="document">
-            <div className="modal-content">
-                <div className="modal-header">
-                <h5 className="modal-title">Agregar Usuario</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                </div>
-                <div className="modal-body">
-                    <form className="form" onSubmit={handleSubmit}>
-                        <div className="form-grup ">
-                            <label className="label label-default ">Nombre</label>
-                            <input 
-                                type="text" 
-                                className="form-control"
-                                name="nombre"
-                                value={agregarUsuario.nombre}
-                                onChange={(e)=>handleChange(e)}
-                                required
-                                />
-                        </div>
-                        <div className="form-grup">
-                            <label className="label label-default">Apellido Paterno</label>
-                            <input 
-                                type="text" 
-                                className="form-control"
-                                name="apellidoPaterno"
-                                value={agregarUsuario.apellidoPaterno}
-                                onChange={(e)=>handleChange(e)}
-                                required
-                                />
-                        </div>
-                        <div className="form-grup">
-                            <label className="label label-default">Apellido Materno</label>
-                            <input type="text" 
-                                    className="form-control"
-                                    name="apellidoMaterno"
-                                    value={agregarUsuario.apellidoMaterno}
-                                    onChange={(e)=>handleChange(e)}
-                                    required
-                                    />
-                        </div>
-                        <div className="form-grup">
-                            <label className="label label-default">Empresa</label>
-                            <input type="text" 
-                                    className="form-control"
-                                    name="empresa"
-                                    value={agregarUsuario.empresa}
-                                    onChange={(e)=>handleChange(e)}
-                                    required
-                                    />
-                        </div>
-                        <div className="form-grup">
-                            <label className="label label-default">Salario</label>
-                            <input type="number" 
-                                    className="form-control"
-                                    name="salario"
-                                    value={agregarUsuario.salario}
-                                    onChange={(e)=>handleChange(e)}
-                                    required
-                                    />
-                        </div>
-                        <div className="form-grup">
-                        <label className="label label-default">Imagen</label>
-                        <input type="title" 
-                                className="form-control"
-                                name="imagen"
-                                value={agregarUsuario.imagen}
-                                onChange={(e)=>handleChange(e)}
-                                required
-                                />
-                    </div>
+            <Modals 
+                    handleSubmit={handleSubmit}
+                    agregarUsuario={agregarUsuario}
+                    handleChange={handleChange}
+                    editarUsuario={editarUsuario}
+                    handleSubmitEdit={handleSubmitEdit}
+                    handleChangeEditar={handleChangeEditar}/>
 
-                    <div className="modal-footer">
-                    <button type="submit" className="btn btn-editar">Guardar</button>
-                    </div>
-                    </form>
-                </div>
-               
-            </div>
-            </div>
+
+
         </div>
 
-
-        <div className="modal fade" id="modelEditar" 
-        tabIndex={-1} role="dialog" 
-        aria-labelledby="modelTitleId" 
-        aria-hidden="true">
-        <div className="modal-dialog" role="document">
-        <div className="modal-content">
-            <div className="modal-header">
-            <h5 className="modal-title">Editar Usuario  { editarUsuario.nombre }</h5>
-            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-            </div>
-            <div className="modal-body">
-                <form className="form" onSubmit={handleSubmitEdit}>
-                    <div className="form-grup ">
-                        <label className="label label-default ">Nombre</label>
-                        <input 
-                            type="text" 
-                            className="form-control"
-                            name="nombre"
-                            value={editarUsuario.nombre}
-                            onChange={(e)=>handleChangeEditar(e)}
-                            required
-                            />
-                    </div>
-                    <div className="form-grup">
-                        <label className="label label-default">Apellido Paterno</label>
-                        <input 
-                            type="text" 
-                            className="form-control"
-                            name="apellidoPaterno"
-                            value={editarUsuario.apellidoPaterno}
-                            onChange={(e)=>handleChangeEditar(e)}
-                            required
-                            />
-                    </div>
-                    <div className="form-grup">
-                        <label className="label label-default">Apellido Materno</label>
-                        <input type="text" 
-                                className="form-control"
-                                name="apellidoMaterno"
-                                value={editarUsuario.apellidoMaterno}
-                                onChange={(e)=>handleChangeEditar(e)}
-                                required
-                                />
-                    </div>
-              
-                    <div className="form-grup">
-                        <label className="label label-default">Salario</label>
-                        <input type="number" 
-                                className="form-control"
-                                name="salario"
-                                value={editarUsuario.salario}
-                                onChange={(e)=>handleChangeEditar(e)}
-                                required
-                                />
-                    </div>
-                    <div className="form-grup">
-                    <label className="label label-default">Imagen</label>
-                    <input type="title" 
-                            className="form-control"
-                            name="imagen"
-                            value={editarUsuario.imagen}
-                            onChange={(e)=>handleChangeEditar(e)}
-                            required
-                            />
-                </div>
-
-                <div className="modal-footer">
-                <button type="submit" className="btn btn-editar">Guardar</button>
-                </div>
-                </form>
-            </div>
-           
-        </div>
-        </div>
-    </div>
-        </div>
-
-        </fragment>
+        </Fragment>
 
     )
 }
