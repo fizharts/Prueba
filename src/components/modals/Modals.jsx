@@ -70,17 +70,7 @@ export const Modals = ({ handleSubmit, agregarUsuario, handleChange, editarUsuar
                                         required
                                     />
                                 </div>
-                                {/* <div className="form-grup">
-                                    <label className="label label-default">Imagen</label>
-                                    <input type="file" accept="video/*;capture=camcorder"
-                                        className="form-control"
-                                        name="imagen"
-                                        value={agregarUsuario.imagen}
-                                        onChange={(e) => handleChange(e)}
-
-                                    />
-                                </div> */}
-
+                   
                                 <div className="modal-footer">
                                     <button type="submit" className="btn btn-editar">Guardar</button>
                                 </div>
@@ -99,7 +89,7 @@ export const Modals = ({ handleSubmit, agregarUsuario, handleChange, editarUsuar
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title">Editar Usuario  {editarUsuario.nombre}</h5>
+                            <h5 className="modal-title">Editar :  {editarUsuario.nombre} {editarUsuario.apellidoPaterno} {editarUsuario.apellidoMaterno}</h5>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>

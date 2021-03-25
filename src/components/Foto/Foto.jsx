@@ -28,6 +28,7 @@ export const Foto = () => {
          style={{
             width:'25px',
             cursor:'pointer'
-        }} src="/camara-fotografica.svg"/>
+        }} src="/camara-fotografica.svg"
+            alt="tomar foto"/>
     )
 }

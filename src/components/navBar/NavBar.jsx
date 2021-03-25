@@ -27,10 +27,10 @@ export const NavBar = () => {
 
     useEffect(() => {
         buscador(usuarios , 'tel')
-    }, [])
+    }, [usuarios])
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-green">
-            <a className="navbar-brand" href="#">Navbar</a>
+            <span className="navbar-brand" >Navbar</span>
             <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon" />
             </button>

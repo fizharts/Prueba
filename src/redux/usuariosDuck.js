@@ -7,7 +7,7 @@ const initialState = {
     ultimoId : 0
 }
 
-export default (state = initialState, { type, payload }) => {
+export const Usuarios = (state = initialState, { type, payload }) => {
     switch (type) {
 
     case types.usuarios:
