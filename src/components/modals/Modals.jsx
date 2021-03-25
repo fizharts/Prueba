@@ -70,7 +70,7 @@ export const Modals = ({ handleSubmit, agregarUsuario, handleChange, editarUsuar
                                         required
                                     />
                                 </div>
-                                <div className="form-grup">
+                                {/* <div className="form-grup">
                                     <label className="label label-default">Imagen</label>
                                     <input type="file" accept="video/*;capture=camcorder"
                                         className="form-control"
@@ -79,7 +79,7 @@ export const Modals = ({ handleSubmit, agregarUsuario, handleChange, editarUsuar
                                         onChange={(e) => handleChange(e)}
 
                                     />
-                                </div>
+                                </div> */}
 
                                 <div className="modal-footer">
                                     <button type="submit" className="btn btn-editar">Guardar</button>
@@ -149,7 +149,7 @@ export const Modals = ({ handleSubmit, agregarUsuario, handleChange, editarUsuar
                                         required
                                     />
                                 </div>
-                                <div className="form-grup">
+                                {/* <div className="form-grup">
                                     <label className="label label-default">Imagen</label>
                                     <input type="title"
                                         className="form-control"
@@ -158,7 +158,7 @@ export const Modals = ({ handleSubmit, agregarUsuario, handleChange, editarUsuar
                                         onChange={(e) => handleChangeEditar(e)}
                                         required
                                     />
-                                </div>
+                                </div> */}
 
                                 <div className="modal-footer">
                                     <button type="submit" className="btn btn-editar">Guardar</button>

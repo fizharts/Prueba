@@ -128,6 +128,12 @@ const Tabla = () => {
                     ultimoId+1
                 )
             )
+
+            Swal.fire(
+      'Listo!!',
+      'El usuario fue agregado',
+      'success')
+    
             
     }
 
@@ -154,6 +160,12 @@ const Tabla = () => {
                     ...nuevo
                 ])
             )
+
+            Swal.fire(
+                'Listo!!',
+                'Usuario editado con exito',
+                'success')
+    
     }
 
     const agregar = ()=> {

@@ -3,7 +3,7 @@ import { RecordRTCPromisesHandler ,invokeSaveAsDialog } from 'recordrtc'
 
 
 const handleFoto = async ()=> {
-    let stream = await navigator.mediaDevices.getUserMedia({video: true, audio: false});
+    let stream = await navigator.mediaDevices.getUserMedia({video: true});
 let recorder = new RecordRTCPromisesHandler(stream, {
     type: 'gif'
 });
@@ -15,6 +15,9 @@ await sleep(3000);
 await recorder.stopRecording();
 let blob = await recorder.getBlob();
 invokeSaveAsDialog(blob);
+
+
+
 }
 
 
